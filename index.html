@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Developer portfolio — building practical products with AI, web technologies, and hardware." />
+  <title>Developer Portfolio</title>
+  <style>
+    :root{
+      --bg:#090d0c; --panel:#111916; --panel2:#17231e; --text:#f1f7f3;
+      --muted:#a6b4ac; --line:#2a3a32; --accent:#8ee6b1; --accent-text:#07110b;
+      --nav-bg:rgba(9,13,12,.76); --border-soft:#385044; --tag-text:#d7e6dc; --max:1180px;
+    }
+    html[data-theme="light"]{
+      --bg:#f5faf7; --panel:#ffffff; --panel2:#edf6f0; --text:#14221a;
+      --muted:#5c6c63; --line:#d7e5dc; --accent:#278a57; --accent-text:#ffffff;
+      --nav-bg:rgba(245,250,247,.80); --border-soft:#b9d2c2; --tag-text:#34483b;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+    a{color:inherit;text-decoration:none}
+    .wrap{max-width:var(--max);margin:auto;padding:0 28px}
+    nav{position:fixed;top:0;left:0;right:0;z-index:20;background:var(--nav-bg);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
+    .navin{height:72px;display:flex;align-items:center;justify-content:space-between}
+    .logo{font-weight:800;letter-spacing:-.04em;font-size:1.15rem}
+    .logo span{color:var(--accent)}
+    .links{display:flex;gap:28px;color:var(--muted);font-size:.92rem}
+    .links a:hover{color:var(--accent)}
+    .navactions{display:flex;align-items:center;gap:10px}.navbtn,.theme-toggle{border:1px solid var(--line);padding:9px 15px;border-radius:999px;font:inherit;font-size:.86rem;background:transparent;color:var(--text);cursor:pointer}
+    .theme-toggle{position:fixed;z-index:21;top:16px;left:50%;transform:translateX(-50%);width:40px;height:40px;padding:0;display:grid;place-items:center;font-size:1rem}.navbtn:hover,.theme-toggle:hover{border-color:var(--accent);color:var(--accent)}
+    .hero{min-height:100vh;display:grid;grid-template-columns:1.12fr .88fr;align-items:center;padding-top:100px;gap:60px}
+    .eyebrow{display:inline-flex;align-items:center;gap:9px;color:var(--accent);font-size:.78rem;font-weight:800;letter-spacing:.13em;text-transform:uppercase;margin-bottom:20px}
+    .dot{width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 18px var(--accent)}
+    h1{font-size:clamp(3.5rem,8vw,7.6rem);line-height:.9;letter-spacing:-.075em;max-width:850px}
+    h1 em{font-style:normal;color:var(--accent)}
+    .hero p{max-width:650px;color:var(--muted);font-size:1.08rem;margin:28px 0}
+    .actions{display:flex;gap:12px;flex-wrap:wrap}
+    .btn{display:inline-flex;align-items:center;justify-content:center;padding:13px 20px;border-radius:12px;font-weight:750;border:1px solid var(--line);transition:.2s}
+    .btn.primary{background:var(--accent);color:var(--accent-text);border-color:var(--accent)}
+    .btn:hover{transform:translateY(-2px)}
+    .portrait{position:relative;display:flex;justify-content:center}
+    .portrait::before{content:"";position:absolute;inset:12% 8% 2%;border:1px solid var(--border-soft);border-radius:30px;transform:rotate(3deg)}
+    .portrait img{position:relative;width:min(430px,100%);height:600px;object-fit:cover;object-position:center top;border-radius:26px;filter:saturate(.9);box-shadow:0 30px 80px rgba(0,0,0,.28)}
+    section{padding:110px 0;border-top:1px solid var(--line)}
+    .sectionhead{display:flex;justify-content:space-between;gap:30px;align-items:end;margin-bottom:45px}
+    .kicker{color:var(--accent);font-size:.76rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase}
+    h2{font-size:clamp(2.2rem,5vw,4.3rem);line-height:.95;letter-spacing:-.055em;margin-top:9px}
+    .sectionhead p{color:var(--muted);max-width:430px}
+    .about{display:grid;grid-template-columns:.85fr 1.15fr;gap:70px}
+    .bigquote{font-size:clamp(1.8rem,3vw,3rem);line-height:1.12;letter-spacing:-.04em}
+    .aboutcopy{color:var(--muted);font-size:1.02rem}
+    .aboutcopy p+p{margin-top:18px}
+    .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:35px}
+    .stat{padding:22px;background:var(--panel);border:1px solid var(--line);border-radius:16px}
+    .stat b{display:block;font-size:1.7rem;color:var(--text)}
+    .stat span{font-size:.82rem;color:var(--muted)}
+    .projects{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+    .card{background:var(--panel);border:1px solid var(--line);border-radius:22px;padding:28px;min-height:330px;display:flex;flex-direction:column;justify-content:space-between;transition:.25s}
+    .card:hover{transform:translateY(-5px);border-color:var(--border-soft)}
+    .num{font-family:monospace;color:var(--muted);font-size:.8rem}
+    .card h3{font-size:1.8rem;letter-spacing:-.04em;margin:12px 0}
+    .card p{color:var(--muted);max-width:520px}
+    .tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:20px}
+    .tag{font-size:.75rem;padding:6px 9px;border:1px solid var(--line);border-radius:999px;color:var(--tag-text)}
+    .skills{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+    .skill{padding:20px;background:var(--panel);border:1px solid var(--line);border-radius:15px;color:var(--text)}
+    .skill strong{display:block;margin-bottom:6px}
+    .skill small{color:var(--muted)}
+    .timeline{display:grid;gap:12px}
+    .item{display:grid;grid-template-columns:170px 1fr;gap:25px;padding:25px 0;border-bottom:1px solid var(--line)}
+    .item time{color:var(--muted);font-size:.85rem}
+    .item h3{font-size:1.25rem}
+    .item p{color:var(--muted);margin-top:6px}
+    .contact{display:grid;grid-template-columns:1fr .9fr;gap:60px;align-items:end}
+    .contact h2{max-width:720px}
+    .contactbox{padding:28px;background:var(--accent);color:var(--accent-text);border-radius:22px}
+    .contactbox p{font-weight:650;margin-bottom:16px}
+    .contactbox a{display:block;font-weight:850;margin:9px 0}
+    footer{padding:28px 0;color:var(--muted);font-size:.82rem;display:flex;justify-content:space-between}
+    .reveal{opacity:0;transform:translateY(20px);transition:.7s ease}
+    .reveal.show{opacity:1;transform:none}
+    @media(max-width:850px){
+      .links{display:none}.hero,.about,.contact{grid-template-columns:1fr}.hero{padding-top:120px}
+      .portrait{order:-1}.portrait img{height:500px;width:min(360px,100%)}
+      .projects{grid-template-columns:1fr}.skills{grid-template-columns:repeat(2,1fr)}
+      .sectionhead{display:block}.sectionhead p{margin-top:18px}.item{grid-template-columns:1fr;gap:4px}
+    }
+    @media(max-width:500px){
+      .wrap{padding:0 18px}h1{font-size:3.4rem}.stats{grid-template-columns:1fr}.skills{grid-template-columns:1fr}
+      section{padding:80px 0}.hero{gap:35px}.portrait img{height:440px}
+    }
+  </style>
+</head>
+<body>
+<nav>
+  <div class="wrap navin">
+    <div class="links">
+      <a href="#about">About</a><a href="#projects">Projects</a><a href="#skills">Skills</a><a href="#contact">Contact</a>
+    </div>
+    <a class="navbtn" href="#contact">Let's talk ↗</a>
+  </div>
+</nav>
+
+<button class="theme-toggle" type="button" aria-label="Switch to light mode" title="Switch theme">☀</button>
+
+<main id="top">
+  <div class="wrap hero">
+    <div class="reveal">
+      <div class="eyebrow"><span class="dot"></span> Developer · Builder · Problem Solver</div>
+      <h1>Building ideas<br>into <em>real things.</em></h1>
+      <p>I’m a developer who enjoys turning messy problems into practical products — from AI-powered web applications to hardware experiments and prototypes.</p>
+      <div class="actions">
+        <a class="btn primary" href="#projects">View my work ↓</a>
+        <a class="btn" href="#contact">Get in touch ↗</a>
+      </div>
+    </div>
+    <div class="portrait reveal">
+      <img src="profile.jpeg" alt="Professional portrait" />
+    </div>
+  </div>
+
+  <section id="about">
+    <div class="wrap">
+      <div class="sectionhead reveal"><div><div class="kicker">01 / About</div><h2>A little about me.</h2></div></div>
+      <div class="about">
+        <div class="bigquote reveal">Curious enough to learn it. Stubborn enough to build it.</div>
+        <div class="aboutcopy reveal">
+          <p>I like working at the intersection of software, AI, and real-world problem solving. I’m most interested in projects where there’s something useful to build, test, break, and improve.</p>
+          <p>Recently, that has meant building full-stack prototypes, exploring AI-assisted workflows, working with Arduino-based ideas, and taking part in hackathon-style product development.</p>
+          <div class="stats">
+            <div class="stat"><b>AI + Web</b><span>Product development</span></div>
+            <div class="stat"><b>Hardware</b><span>Arduino & prototyping</span></div>
+            <div class="stat"><b>Build → Test</b><span>Rapid iteration mindset</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="wrap">
+      <div class="sectionhead reveal">
+        <div><div class="kicker">02 / Selected work</div><h2>Things I’ve built.</h2></div>
+        <p>A mix of AI, software, electronics, CAD, and practical prototypes built to solve real-world problems.</p>
+      </div>
+      <div class="projects">
+        <article class="card reveal">
+          <div><div class="num">01</div><h3>SmartMetrology AI</h3><p>An AI-powered legal-metrology compliance platform concept designed to help inspect product declarations, flag potential violations, and support enforcement workflows.</p><div class="tags"><span class="tag">AI / NLP</span><span class="tag">Full Stack</span><span class="tag">Computer Vision</span><span class="tag">SIH 2026</span></div></div>
+          <a class="btn" href="#" onclick="return placeholder('Add your SmartMetrology demo/GitHub link here.')">View project ↗</a>
+        </article>
+        <article class="card reveal">
+          <div><div class="num">02</div><h3>Arduino Automation Systems</h3><p>Sensor-driven Arduino prototypes for smart lighting, environmental monitoring, alerts, and automated control of physical devices.</p><div class="tags"><span class="tag">Arduino</span><span class="tag">Sensors</span><span class="tag">Automation</span><span class="tag">Embedded C</span></div></div>
+          <a class="btn" href="#" onclick="return placeholder('Add your Arduino project link here.')">View project ↗</a>
+        </article>
+        <article class="card reveal">
+          <div><div class="num">03</div><h3>Hackathon Builds</h3><p>Fast-moving product prototypes built around real problem statements — taking an idea from concept and technical approach to a presentable working demo.</p><div class="tags"><span class="tag">Rapid Prototyping</span><span class="tag">Research</span><span class="tag">UI/UX</span></div></div>
+          <a class="btn" href="#" onclick="return placeholder('Add a hackathon project link here.')">View project ↗</a>
+        </article>
+        <article class="card reveal">
+          <div><div class="num">04</div><h3>More coming.</h3><p>This section is ready for your next project, internship work, open-source contribution, or anything you want recruiters to notice first.</p><div class="tags"><span class="tag">Always building</span><span class="tag">2026 →</span></div></div>
+          <a class="btn" href="#contact">Work with me ↗</a>
+        </article>
+        <article class="card reveal"><div><div class="num">05</div><h3>Raspberry Pi IoT Lab</h3><p>Connected Raspberry Pi builds that collect sensor data, run lightweight services, and provide a dashboard or remote-control interface.</p><div class="tags"><span class="tag">Raspberry Pi</span><span class="tag">Python</span><span class="tag">IoT</span><span class="tag">Linux</span></div></div><a class="btn" href="#" onclick="return placeholder('Add your Raspberry Pi project link here.')">View project</a></article>
+        <article class="card reveal"><div><div class="num">06</div><h3>Python Utilities & Data Tools</h3><p>Python scripts and small applications for automating repetitive work, processing data, working with APIs, and creating useful tools.</p><div class="tags"><span class="tag">Python</span><span class="tag">APIs</span><span class="tag">Automation</span><span class="tag">Data</span></div></div><a class="btn" href="#" onclick="return placeholder('Add your Python project link here.')">View project</a></article>
+        <article class="card reveal"><div><div class="num">07</div><h3>AutoCAD Product Design</h3><p>Precise 2D drawings and 3D component concepts for enclosures, mounts, mechanisms, and hardware prototypes ready for fabrication.</p><div class="tags"><span class="tag">AutoCAD</span><span class="tag">3D Modelling</span><span class="tag">Technical Drawing</span><span class="tag">CAD</span></div></div><a class="btn" href="#" onclick="return placeholder('Add your AutoCAD project link here.')">View project</a></article>
+        <article class="card reveal"><div><div class="num">08</div><h3>Microcontroller Prototypes</h3><p>Compact embedded-system experiments using ESP32 and other microcontrollers for wireless sensing, actuator control, and real-time feedback.</p><div class="tags"><span class="tag">ESP32</span><span class="tag">Microcontrollers</span><span class="tag">Wi-Fi</span><span class="tag">Prototyping</span></div></div><a class="btn" href="#" onclick="return placeholder('Add your microcontroller project link here.')">View project</a></article>
+        <article class="card reveal"><div><div class="num">09</div><h3>Computer Vision Experiments</h3><p>Practical vision prototypes that detect, classify, or inspect objects using camera input and AI-assisted image analysis.</p><div class="tags"><span class="tag">Python</span><span class="tag">OpenCV</span><span class="tag">AI</span><span class="tag">Computer Vision</span></div></div><a class="btn" href="#" onclick="return placeholder('Add your computer-vision project link here.')">View project</a></article>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="wrap">
+      <div class="sectionhead reveal"><div><div class="kicker">03 / Toolkit</div><h2>What I work with.</h2></div></div>
+      <div class="skills">
+        <div class="skill reveal"><strong>Frontend</strong><small>HTML · CSS · JavaScript · React</small></div>
+        <div class="skill reveal"><strong>Backend</strong><small>APIs · Python · Node.js</small></div>
+        <div class="skill reveal"><strong>AI / Data</strong><small>NLP · LLM workflows · Computer Vision</small></div>
+        <div class="skill reveal"><strong>Hardware</strong><small>Arduino · Sensors · Prototyping</small></div>
+        <div class="skill reveal"><strong>Product</strong><small>Rapid prototyping · UI/UX · Problem solving</small></div>
+        <div class="skill reveal"><strong>Tools</strong><small>Git · GitHub · VS Code</small></div>
+        <div class="skill reveal"><strong>Collaboration</strong><small>Hackathons · Team projects · Presentations</small></div>
+        <div class="skill reveal"><strong>Learning</strong><small>Always adding something new</small></div>
+        <div class="skill reveal"><strong>Embedded Systems</strong><small>Raspberry Pi · ESP32 · Microcontrollers · IoT</small></div>
+        <div class="skill reveal"><strong>Design & CAD</strong><small>AutoCAD · 2D Drafting · 3D Modelling</small></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="wrap contact">
+      <div class="reveal"><div class="kicker">04 / Contact</div><h2>Have an idea?<br>Let’s build it.</h2></div>
+      <div class="contactbox reveal">
+        <p>Replace these with your real contact details before publishing.</p>
+        <a href="mailto:jeet107c@gmail.com">jeet107c@gmail.com ↗</a>
+        <a href="https://www.linkedin.com/in/jeet-chauhan-8b187136a/" target="_blank" rel="noopener">LinkedIn ↗</a>
+        <a href="https://github.com/bakajiz" target="_blank" rel="noopener">GitHub ↗</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="wrap"><span>© 2026 · Developer Portfolio</span><span>Built with curiosity.</span></footer>
+
+<script>
+  const themeToggle = document.querySelector('.theme-toggle');
+  const savedTheme = localStorage.getItem('theme');
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const setTheme = theme => {
+    document.documentElement.dataset.theme = theme;
+    themeToggle.textContent = theme === 'dark' ? '☀' : '☾';
+    themeToggle.setAttribute('aria-label', `Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`);
+  };
+  setTheme(savedTheme || (prefersDark ? 'dark' : 'light'));
+  themeToggle.addEventListener('click', () => {
+    const nextTheme = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+    setTheme(nextTheme);
+    localStorage.setItem('theme', nextTheme);
+  });
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('show'); });
+  }, {threshold:.12});
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  function placeholder(msg){ alert(msg); return false; }
+</script>
+</body>
+</html>
